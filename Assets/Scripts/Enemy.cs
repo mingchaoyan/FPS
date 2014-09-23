@@ -77,6 +77,15 @@ public class Enemy : MonoBehaviour {
             {
                 m_ani.SetBool("idle", true);
                 m_timer = 2;
+                m_player.OnDamage(1);
+            }
+        }
+        if (stateInfo.nameHash == Animator.StringToHash("Base Layer.death") && !m_ani.IsInTransition(0))
+        {
+            if (stateInfo.normalizedTime >= 1.0f)
+            {
+                GameManager.Instance.SetScore(100);
+                Destroy(this.gameObject);
             }
         }
 	}
@@ -96,5 +105,14 @@ public class Enemy : MonoBehaviour {
     {
         float speed = m_movSpeed * Time.deltaTime;
         m_agent.Move(m_transform.TransformDirection((new Vector3(0, 0, speed))));
+    }
+
+    public void OnDamage(int damage)
+    {
+        m_life -= damage;
+        if (m_life <= 0)
+        {
+            m_ani.SetBool("death", true);
+        }
     }
 }

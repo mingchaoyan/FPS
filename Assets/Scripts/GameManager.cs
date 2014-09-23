@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 
         txt_ammo = this.transform.FindChild("textWeapon").GetComponent<GUIText>();
         txt_hiscore = this.transform.FindChild("hiscore").GetComponent<GUIText>();
-        txt_life = this.transform.FindChild("heath").GetComponent<GUIText>();
+        txt_life = this.transform.FindChild("textHealth").GetComponent<GUIText>();
         txt_score = this.transform.FindChild("score").GetComponent<GUIText>();
 	}
 	
@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour {
         if (m_ammo <= 0)
             m_ammo = 100 - m_ammo;
         txt_ammo.text = m_ammo.ToString() + "/100";
+    }
+
+    public void SetLife(int life)
+    {
+        txt_life.text = life.ToString();
     }
 
     void OnGUI()

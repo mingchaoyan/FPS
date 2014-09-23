@@ -13,6 +13,13 @@ public class Player : MonoBehaviour {
     Vector3 m_camRot;
     float m_camHeight = 1.4f;
 
+    Transform m_muzzlepoint;
+    public LayerMask m_layer;
+    public Transform m_fx;
+
+    public AudioClip m_audio;
+
+    float m_shootTimer = 0;
 	// Use this for initialization
 	void Start () {
         m_transform = this.transform;
@@ -27,6 +34,8 @@ public class Player : MonoBehaviour {
         m_camRot = m_camTransform.eulerAngles;
 
         Screen.lockCursor = true;
+
+        m_muzzlepoint = m_camTransform.FindChild("M16/weapon/muzzlepoint").transform;
 	}
 	
 	// Update is called once per frame
@@ -34,6 +43,29 @@ public class Player : MonoBehaviour {
         if (m_life <= 0)
             return;
         Control();
+        m_shootTimer -= Time.deltaTime;
+
+        if (Input.GetMouseButton(0) && m_shootTimer <= 0)
+        {
+            m_shootTimer = 0.1f;
+            this.audio.PlayOneShot(m_audio);
+
+            GameManager.Instance.SetAmmo(1);
+            RaycastHit info;
+
+            bool hit = Physics.Raycast(m_muzzlepoint.position, m_camTransform.TransformDirection(Vector3.forward), out info, 100, m_layer);
+
+            if (hit)
+            {
+                if (info.transform.tag.CompareTo("enemy") == 0)
+                {
+                    Enemy enemy = info.transform.GetComponent<Enemy>();
+                    enemy.OnDamage(1);
+                }
+                Instantiate(m_fx, info.point, info.transform.rotation);
+            }
+
+        }
 	}
 
     void Control()
@@ -78,4 +110,15 @@ public class Player : MonoBehaviour {
     {
         Gizmos.DrawIcon(this.transform.position, "Spawn.tif");
     }
+
+    public void OnDamage(int damage)
+    {
+        m_life -= damage;
+
+        GameManager.Instance.SetLife(m_life);
+
+        if (m_life <= 0)
+            Screen.lockCursor = false;
+    }
+
 }
