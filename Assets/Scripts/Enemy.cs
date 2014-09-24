@@ -13,6 +13,14 @@ public class Enemy : MonoBehaviour {
     float m_timer = 2;
     int m_life = 15;
 
+    protected EnemySpawn m_spawn;
+
+    public void Init(EnemySpawn spawn)
+    {
+        m_spawn = spawn;
+        m_spawn.m_enemyCount++;
+    }
+
 	// Use this for initialization
 	void Start () {
         m_transform = this.transform;
@@ -84,8 +92,7 @@ public class Enemy : MonoBehaviour {
         {
             if (stateInfo.normalizedTime >= 1.0f)
             {
-                GameManager.Instance.SetScore(100);
-                Destroy(this.gameObject);
+                OnDeath();
             }
         }
 	}
@@ -114,5 +121,12 @@ public class Enemy : MonoBehaviour {
         {
             m_ani.SetBool("death", true);
         }
+    }
+
+    public void OnDeath()
+    {
+        m_spawn.m_enemyCount--;
+        GameManager.Instance.SetScore(100);
+        Destroy(this.gameObject);
     }
 }
