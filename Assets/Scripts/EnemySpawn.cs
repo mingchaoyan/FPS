@@ -29,9 +29,7 @@ public class EnemySpawn : MonoBehaviour {
                 m_timer = 5;
 
             Transform obj = (Transform)Instantiate(m_enemy, m_transform.position, Quaternion.identity);
-            Debug.Log(obj);
             Enemy enemy = obj.GetComponent<Enemy>();
-            Debug.Log(enemy);
 
             enemy.Init(this);
         }
