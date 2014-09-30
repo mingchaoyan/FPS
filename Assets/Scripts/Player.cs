@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
     public Transform m_transform;
     CharacterController m_ch;
 
@@ -20,8 +21,9 @@ public class Player : MonoBehaviour {
     public AudioClip m_audio;
 
     float m_shootTimer = 0;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         m_transform = this.transform;
         m_ch = this.GetComponent<CharacterController>();
 
@@ -36,10 +38,11 @@ public class Player : MonoBehaviour {
         Screen.lockCursor = true;
 
         m_muzzlepoint = m_camTransform.FindChild("M16/weapon/muzzlepoint").transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (m_life <= 0)
             return;
         Control();
@@ -53,10 +56,15 @@ public class Player : MonoBehaviour {
             GameManager.Instance.SetAmmo(1);
             RaycastHit info;
 
-            bool hit = Physics.Raycast(m_muzzlepoint.position, m_camTransform.TransformDirection(Vector3.forward), out info, 100, m_layer);
+            bool hit = Physics.Raycast(m_muzzlepoint.position,
+                m_camTransform.TransformDirection(Vector3.forward),
+                out info,
+                100,
+                m_layer);
 
             if (hit)
             {
+                Debug.Log("hit");
                 if (info.transform.tag.CompareTo("enemy") == 0)
                 {
                     Enemy enemy = info.transform.GetComponent<Enemy>();
@@ -64,9 +72,8 @@ public class Player : MonoBehaviour {
                 }
                 Instantiate(m_fx, info.point, info.transform.rotation);
             }
-
         }
-	}
+    }
 
     void Control()
     {
@@ -120,5 +127,4 @@ public class Player : MonoBehaviour {
         if (m_life <= 0)
             Screen.lockCursor = false;
     }
-
 }
