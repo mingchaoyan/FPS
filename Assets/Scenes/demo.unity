@@ -140,6 +140,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: .743597388
       objectReference: {fileID: 0}
+    - target: {fileID: 19500000, guid: f342a60a7c4986748b80496914016cfd, type: 2}
+      propertyPath: m_Speed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f342a60a7c4986748b80496914016cfd, type: 2}
   m_RootGameObject: {fileID: 910800167}
@@ -1371,7 +1375,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 910800167}
   m_Enabled: 1
   m_Radius: .5
-  m_Speed: 2
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

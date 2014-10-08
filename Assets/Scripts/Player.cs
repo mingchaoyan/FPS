@@ -64,13 +64,12 @@ public class Player : MonoBehaviour
 
             if (hit)
             {
-                Debug.Log("hit");
                 if (info.transform.tag.CompareTo("enemy") == 0)
                 {
                     Enemy enemy = info.transform.GetComponent<Enemy>();
                     enemy.OnDamage(1);
+                    Instantiate(m_fx, info.point, info.transform.rotation);
                 }
-                Instantiate(m_fx, info.point, info.transform.rotation);
             }
         }
     }
