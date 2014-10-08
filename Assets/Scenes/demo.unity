@@ -795,7 +795,7 @@ GameObject:
   - 92: {fileID: 736078324}
   - 81: {fileID: 736078323}
   m_Layer: 0
-  m_Name: smallCamera
+  m_Name: SmallCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
