@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0) && m_shootTimer <= 0)
         {
+            Screen.lockCursor = true;
             m_shootTimer = 0.1f;
             this.audio.PlayOneShot(m_audio);
 
@@ -106,6 +107,11 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             xm += m_movSpeed * Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Screen.lockCursor = false;
         }
         m_ch.Move(m_transform.TransformDirection(new Vector3(xm, ym, zm)));
         Vector3 pos = m_transform.position;
