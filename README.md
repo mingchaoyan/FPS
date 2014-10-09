@@ -18,7 +18,7 @@
 游戏展示
 --------
 - 开始界面：
-![image](https://github.com/mingchaoyan/FPS/blob/master/GameShots/start.png)
+![image](https://github.com/mingchaoyan/FPS/blob/master/GameShots/begin.png)
 - 游戏界面：
 ![image](https://github.com/mingchaoyan/FPS/blob/master/GameShots/playing.png)
 - 结束界面：
