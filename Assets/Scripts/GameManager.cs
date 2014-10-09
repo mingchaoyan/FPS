@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour {
 
     void OnGUI()
     {
+        GUITexture tex = this.transform.FindChild("heath").GetComponent<GUITexture>();
+        tex.pixelInset = new Rect(0, Screen.height - 55, 55, 55);
         if (m_player.m_life <= 0)
         {
             GUI.skin.label.alignment = TextAnchor.MiddleCenter;
